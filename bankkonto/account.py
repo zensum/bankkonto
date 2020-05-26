@@ -94,16 +94,20 @@ _type_2 = [(_parse_result[0], int(_parse_result[1]),
 _type_2.sort(key=lambda x: x[1])
 
 
-def validate(clearing_number, bank_account_number):
+def validate(clearing_number, bank_account_number, zero_fill_account=False):
 
     clearing_number = re.sub('\D', '', str(clearing_number))
     bank_account_number = re.sub('\D', '', str(bank_account_number))
 
     bank_name, type_, nbr_format, footnote = get_account_number_format_based_on_clearing_number(clearing_number)
 
-    if len(nbr_format.strip('0')) != len(bank_account_number):
-        raise BankkontoValidationError("Bank account number for {0} must be {1} digits.".format(
-            bank_name, len(nbr_format.strip('0'))))
+    account_length = len(nbr_format.strip('0'))
+    if account_length != len(bank_account_number):
+        if zero_fill_account and account_length > len(bank_account_number):
+            bank_account_number = bank_account_number.zfill(account_length)
+        else:
+            raise BankkontoValidationError("Bank account number for {0} must be {1} digits.".format(
+                bank_name, account_length))
 
     if type_ == 1:
         if footnote == 1:
