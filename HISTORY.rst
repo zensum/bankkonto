@@ -2,6 +2,9 @@
 History
 =======
 
+v0.2.1 (2024-01-03)
+- Linter fixes
+
 v0.2.0 (2018-08-29)
 -------------------
 - Improved Module 10 / Luhn algorithm

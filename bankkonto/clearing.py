@@ -88,7 +88,7 @@ Nordea 9960-9969
 
 clearing_nbrs = [(_parse_result[0], int(_parse_result[1]),
                   int(_parse_result[2]) if _parse_result[2] else int(_parse_result[1])) for
-                 _parse_result in re.findall('(.+)\s([\d]+)-*(\d*)', _CLEARING_LIST.strip())]
+                 _parse_result in re.findall(r'(.+)\s([\d]+)-*(\d*)', _CLEARING_LIST.strip())]
 clearing_nbrs.sort(key=lambda x: x[1])
 
 

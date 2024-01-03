@@ -20,7 +20,7 @@ from .account import validate
 
 
 def clean_and_split(bank_account_number):
-    cleaned = re.sub('\D', '', bank_account_number)
+    cleaned = re.sub(r'\D', '', bank_account_number)
     if cleaned.startswith('8'):
         # Swedbank accounts with clearing number that starts with 8
         # has five clearing number digits. Only the four first should
